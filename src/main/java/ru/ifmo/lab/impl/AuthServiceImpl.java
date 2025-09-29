@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.ifmo.lab.api.AuthService;
+import ru.ifmo.lab.api.JwtService;
 import ru.ifmo.lab.impl.data.Profile;
 import ru.ifmo.lab.impl.data.User;
 
@@ -13,7 +14,7 @@ class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtServiceImpl jwtServiceImpl;
+    private final JwtService jwtService;
 
     public void register(String username, String password, String nickname, String email) {
 
@@ -34,6 +35,6 @@ class AuthServiceImpl implements AuthService {
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
-        return jwtServiceImpl.generateToken(user.getUsername());
+        return jwtService.generateToken(user.getUsername());
     }
 }
