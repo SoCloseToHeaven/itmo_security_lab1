@@ -16,7 +16,6 @@ class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final JwtServiceImpl jwtServiceImpl;
 
-
     public List<CommentResponse> getComment(String username) {
         Profile profile = profileRepository.findByUserUsername(username)
                 .orElseThrow(() -> new RuntimeException("Profile not found"));

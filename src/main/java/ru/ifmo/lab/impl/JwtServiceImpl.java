@@ -2,6 +2,7 @@ package ru.ifmo.lab.impl;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.ifmo.lab.api.JwtService;
@@ -15,6 +16,7 @@ class JwtServiceImpl implements JwtService {
 
     private final SecretKey secretKey;
 
+    @Autowired
     public JwtServiceImpl(@Value("${jwt.secret}") String secretKey) {
         this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
