@@ -47,7 +47,7 @@ jobs:
       - name: Run Snyk test (SCA)
         run: snyk test --all-projects --show-vulnerable-paths=all
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_SECRET }}
 
       - name: Upload Snyk report
         uses: actions/upload-artifact@v4
