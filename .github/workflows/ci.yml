@@ -1,0 +1,56 @@
+name: Java CI with Security Scans
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: build/libs/*.jar
+
+      - name: Run SpotBugs (SAST)
+        run: ./gradlew spotbugsMain
+
+      - name: Upload SpotBugs report
+        uses: actions/upload-artifact@v4
+        with:
+          name: spotbugs-report
+          path: build/reports/spotbugs/main/spotbugs.html
+
+      # --- Snyk вместо OWASP Dependency-Check ---
+      - name: Set up Snyk
+        uses: snyk/actions/setup@master
+        with:
+          version: '1.1045.0' # можно указать нужную версию CLI
+
+      - name: Run Snyk test (SCA)
+        run: snyk test --all-projects --show-vulnerable-paths=all
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Upload Snyk report
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-report
+          path: snyk-report.html
