@@ -28,6 +28,7 @@ public class Profile {
     private User user;
 
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default()
     private List<Comment> comments = new ArrayList<>();
 
 }
