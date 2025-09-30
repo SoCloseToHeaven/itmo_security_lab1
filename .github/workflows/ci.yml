@@ -43,9 +43,12 @@ jobs:
         uses: snyk/actions/setup@master
         with:
           version: '1.1045.0' # можно указать нужную версию CLI
-
+      - name: Snyk Test
+        run: snyk test --all-projects --ignore-policy
+      - name: Ignore Vulnerability
+        run: snyk ignore --id=SNYK-JAVA-ORGAPACHECOMMONS-10734078 --reason="Unable to resolve"
       - name: Run Snyk test (SCA)
-        run: snyk test --all-projects --show-vulnerable-paths=none
+        run: snyk test --all-projects --show-vulnerable-paths=all --policy-path=snyk.policy
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_SECRET }}
 
