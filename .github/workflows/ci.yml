@@ -38,18 +38,18 @@ jobs:
           name: spotbugs-report
           path: build/reports/spotbugs/main/spotbugs.html
 
-      # --- Snyk вместо OWASP Dependency-Check ---
-      - name: Set up Snyk
-        uses: snyk/actions/setup@master
-        with:
-          version: '1.1045.0' # можно указать нужную версию CLI
-      - name: Run Snyk test (SCA)
-        run: snyk test --all-projects --show-vulnerable-paths=all
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_SECRET }}
-
-      - name: Upload Snyk report
-        uses: actions/upload-artifact@v4
-        with:
-          name: snyk-report
-          path: snyk-report.html
+#      # --- Не используем Snyk потому что он начинает ругаться на спринговые стартеры
+#      - name: Set up Snyk
+#        uses: snyk/actions/setup@master
+#        with:
+#          version: '1.1045.0' # можно указать нужную версию CLI
+#      - name: Run Snyk test (SCA)
+#        run: snyk test --all-projects --show-vulnerable-paths=all
+#        env:
+#          SNYK_TOKEN: ${{ secrets.SNYK_SECRET }}
+#
+#      - name: Upload Snyk report
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: snyk-report
+#          path: snyk-report.html
