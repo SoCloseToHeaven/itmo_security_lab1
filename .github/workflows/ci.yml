@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spotbugs-report
-          path: build/reports/spotbugs/main/spotbugs.html
+          path: build/reports/spotbugs/problems/problems-report.html
 
 #      # --- Не используем Snyk потому что он начинает ругаться на спринговые стартеры
 #      - name: Set up Snyk

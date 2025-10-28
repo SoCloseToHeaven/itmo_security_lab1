@@ -26,7 +26,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getComment(username));
     }
 
-    @PostMapping("/notes")
+    @PostMapping("/comments")
     public ResponseEntity<?> createPost(
             @RequestHeader("Authorization") String authHeader,
             @RequestBody CreateCommentRequest request
