@@ -21,7 +21,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/data")
+    @GetMapping("/comment")
     public ResponseEntity<List<CommentResponse>> getPosts(@RequestParam String username) {
         return ResponseEntity.ok(commentService.getComment(username));
     }
