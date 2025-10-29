@@ -88,8 +88,9 @@ Content-Type: application/json
 ### Отчеты SAST/SCA
 
 
-
 [Ссылка](https://github.com/SoCloseToHeaven/itmo_security_lab1/actions/runs/18855971736/job/53803888862) на успешно завершённый pipeline
+
+[Ссылка](https://github.com/SoCloseToHeaven/itmo_security_lab1/actions/runs/18914185615/job/53992952129) на отчёт spotbugs
 
 ### Вывод
 
